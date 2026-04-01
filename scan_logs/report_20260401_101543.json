@@ -1,0 +1,9 @@
+{
+  "target": "http://127.0.0.1:65412",
+  "timestamp": "20260401_101543",
+  "waf_detected": false,
+  "tech_stack": ",PHP",
+  "recommended_attacks": "LFI/RCE",
+  "open_ports": "",
+  "recommended_delay": "1s"
+}

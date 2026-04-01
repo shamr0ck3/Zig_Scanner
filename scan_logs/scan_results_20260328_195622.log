@@ -1,0 +1,6 @@
+[1;36m[*] Scan started: 20260328_195622[0m
+    Log: scan_logs/scan_results_20260328_195622.log
+[1;36m[+] Checking for required tools...[0m
+[1;32m[✓] All tools found[0m
+[1;31m[!] Error: Python 'requests' library not found.[0m
+    Install with: pip install requests (or pip3 install requests)
