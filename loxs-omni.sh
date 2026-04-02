@@ -27,9 +27,9 @@ echo -e "${BLU}└────────────────────�
 echo -e "\n${CYN}Select Mission Profile:${RST}"
 echo -e "  ${GRN}1)${RST} ${YLW}LEGACY RECON${RST}  (v3.1: Nmap, Geo-IP, NSE, Headers)"
 echo -e "  ${GRN}2)${RST} ${YLW}MODERN FUZZ${RST}   (v4.3: PATT, Kernel LPE, Anti-Cloak)"
-echo -e "  ${GRN}3)${RST} ${YLW}HERMES AUDIT${RST}  (Env Check, Hygiene, Sync Status)"
-echo -e "  ${GRN}4)${RST} ${YLW}PDF SCANNER${RST}   (v3.1: ClamAV, Web Crawler, Flask)"
-echo -e "  ${GRN}5)${RST} ${YLW}RECON ADVISOR${RST} (Pre‑scan intelligence & payload suggestions)"
+echo -e "  ${GRN}3)${RST} ${YLW}PDF SCANNER${RST}   (v3.1: ClamAV, Web Crawler, Flask)"
+echo -e "  ${GRN}4)${RST} ${YLW}RECON ADVISOR${RST} (Pre‑scan intelligence & payload suggestions)"
+echo -e "  ${GRN}5)${RST} ${YLW}WEGRAB${RST}       (Link Intel, Camera/Geo Capture)"
 echo -e "  ${GRN}Q)${RST} ${RED}EXIT${RST}"
 
 echo -ne "\n${CYN}LOXS@JDT-Mobile:${RST} "
@@ -247,6 +247,9 @@ EOF
 
     # --- 10. Launch modern fuzzer with collected intel ---
     read -p "Do you want to launch the modern fuzzer with these settings? (y/N): " launch_opt
+    local delay_num
+    delay_num=$(echo "$delay" | sed -E 's/^([0-9]+).*$/\1/')
+    [[ -z "$delay_num" ]] && delay_num=3
     if [[ "$launch_opt" =~ ^[Yy]$ ]]; then
         local delay_num
         delay_num=$(echo "$delay" | sed -E 's/^([0-9]+).*$/\1/')
@@ -272,10 +275,6 @@ case $choice in
         bash "$(cd "$(dirname "$0")" && pwd)/intelijen_v3.sh"
         ;;
     3)
-        echo -e "\n${CYN}[+] Running Hermes Audit Pipeline...${RST}"
-        bash "$(cd "$(dirname "$0")" && pwd)/hermes_check.sh"
-        ;;
-    4)
         echo -e "\n${CYN}[+] Initializing PDF_SCAN.EXE v3.1...${RST}"
         if [ ! -f "$(cd "$(dirname "$0")" && pwd)/pdf_scan.py" ]; then
             echo -e "${RED}[!] pdf_scan.py not found.${RST}"
@@ -283,16 +282,25 @@ case $choice in
         fi
         if ! pgrep -f "pdf_scan.py" > /dev/null; then
             echo -e "${GRN}[*] Starting Background Engine...${RST}"
-            python "$(cd "$(dirname "$0")" && pwd)/pdf_scan.py" > /dev/null 2>&1 &
+            python3 "$(cd "$(dirname "$0")" && pwd)/pdf_scan.py" > /dev/null 2>&1 &
             sleep 2
         fi
         termux-open-url http://127.0.0.1:5000
         echo -e "${GRN}[+] Dashboard deployed to browser.${RST}"
         sleep 1 && bash "$(cd "$(dirname "$0")" && pwd)/loxs-omni.sh"
         ;;
-    5)
-        recon_advisor
+    4)
+        bash "$(cd "$(dirname "$0")" && pwd)/recon_advisor.sh"
         bash "$(cd "$(dirname "$0")" && pwd)/loxs-omni.sh"
+        ;;
+    5)
+        echo -e "\n${CYN}[+] Starting WebGrab Pro...${RST}"
+        if ! pgrep -f "wegrab.py" > /dev/null; then
+            python3 "$(cd "$(dirname "$0")" && pwd)/wegrab.py" > /dev/null 2>&1 &
+            sleep 2
+        fi
+        termux-open-url http://127.0.0.1:5000
+        sleep 1 && bash "$(cd "$(dirname "$0")" && pwd)/loxs-omni.sh"
         ;;
     [Qq])
         echo -e "\n${YLW}Cleaning up background tasks...${RST}"
