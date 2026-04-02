@@ -1,0 +1,23 @@
+*.pyc
+*.tmp
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp files
+*.tmp
+*.bak
+*.bak.bak
+
+# Scan output (optional - remove if you WANT logs tracked)
+# scan_logs/
+
+# Nmap raw output
+nmap_port_scan.txt
+headers.txt
+geo_tmp.json
+geolocation_output.json
+
+# Git
+*.orig
