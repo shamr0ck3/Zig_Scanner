@@ -1,0 +1,14 @@
+
+[1;36m========== RECOMMENDATIONS ==========[0m
+1. Delay between requests: 3-5 seconds
+2. Attack types to focus on:  XSS, SQLi, LFI (generic)
+3. Sample payloads to try:
+     Generic: ' OR '1'='1, <script>alert(1)</script>, ../../etc/passwd, {{7*7}}
+4. Parameters to test: viewport
+5. Open ports: 80 443 8080 8443
+6. Subdomains found:
+     m42.example.com,lexs813.example.com,enok1.example.com,cailinlucailin55610.example.com,ringneo80.example.com,vlad3.karplevsky.example.com,getregy2000.example.com,primecerr0.example.com,davidiasam272.example.com,andreykosting3.example.com,new33.erak.example.com,dancepromogarfant3.example.com,support285.example.com,vladimirbrilev19856.example.com,piskunov.alesha.example.com,gurbansoltanov.example.com,a3213601.example.com,hamzaharbou2.example.com,nlyuosev2.example.com,robomarshizobretay2.example.com
+8. Use User-Agent rotation and random IP headers (X-Forwarded-For).
+[1;36m=====================================[0m
+Full report (JSON): /data/data/com.termux/files/home/Zig_Scanner/scan_logs/report_20260402_122204.json
+Advice (text): /data/data/com.termux/files/home/Zig_Scanner/scan_logs/advice_20260402_122204.txt

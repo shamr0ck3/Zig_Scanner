@@ -3,6 +3,7 @@
 
 # ====== CONFIGURATION ======
 RED='\033[1;31m'; GRN='\033[1;32m'; YLW='\033[1;33m'
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BLU='\033[1;34m'; CYN='\033[1;36m'; MAG='\033[1;35m'; RST='\033[0m'
 LOG_DIR="$(cd "$(dirname "$0")" && pwd)/scan_logs"; mkdir -p "$LOG_DIR"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -187,6 +188,18 @@ recon_target() {
     fi
 
     # Port scan
+    # Geolocation lookup
+    local resolved_ip
+    resolved_ip=$(dig +short "$domain" 2>/dev/null | grep -E "^[0-9]+" | head -1)
+    if [[ -n "$resolved_ip" ]]; then
+        local geo country city isp
+        geo=$(python3 "$(cd "$(dirname "$0")" && pwd)/checkip.py" "$resolved_ip" 2>/dev/null)
+        country=$(echo "$geo" | grep '"country"' | cut -d'"' -f4)
+        city=$(echo "$geo" | grep '"city"' | cut -d'"' -f4)
+        isp=$(echo "$geo" | grep '"isp"' | cut -d'"' -f4)
+        log "${BLU}    [*] IP: $resolved_ip | $city, $country | $isp${RST}"
+    fi
+
     log "\n${YLW}[+] Port Scan: $domain${RST}"
     local open_ports
     open_ports=$(fast_port_scan "$domain")
@@ -357,9 +370,9 @@ run_python_audit() {
     local target_url="$1"
     local attack_type="$2"
     [[ -z "$target_url" || "$target_url" == *"FUZZ"* ]] && return
-    if [[ -f "$HOME/jdt_bridge.py" ]]; then
+    if [[ -f "$SCRIPT_DIR/jdt_bridge.py" ]]; then
         local result
-        result=$(python3 "$HOME/jdt_bridge.py" "$target_url" "$attack_type" "$BASELINE_SIZE" 2>/dev/null)
+        result=$(python3 "$SCRIPT_DIR/jdt_bridge.py" "$target_url" "$attack_type" "$BASELINE_SIZE" 2>/dev/null)
         if [[ "$result" == *"VULNERABLE"* ]]; then
             log "${RED}    [!!!] STRATEGIC HIT: $result${RST}"
         elif [[ "$result" == *"ANOMALY"* ]]; then

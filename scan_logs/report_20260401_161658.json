@@ -1,0 +1,14 @@
+{
+  "target": "http://example.com)",
+  "timestamp": "20260401_161658",
+  "waf_detected": false,
+  "technologies": "unknown,unknown",
+  "whatweb_tech": "",
+  "parameters": "",
+  "open_ports": "",
+  "subdomains": "",
+  "origin_ips": "",
+  "recommended_delay": "1 second",
+  "recommended_attacks": " XSS, SQLi, LFI (generic)",
+  "sample_payloads": "Generic: ' OR '1'='1, <script>alert(1)</script>, ../../etc/passwd, {{7*7}}"
+}

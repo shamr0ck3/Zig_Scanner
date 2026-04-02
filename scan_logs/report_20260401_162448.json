@@ -1,0 +1,14 @@
+{
+  "target": "http://example.com",
+  "timestamp": "20260401_162448",
+  "waf_detected": true,
+  "technologies": "unknown,unknown",
+  "whatweb_tech": "",
+  "parameters": "viewport",
+  "open_ports": "80 443 8080 8443",
+  "subdomains": "g01d3n1.example.com,simon22021952.example.com,alick90294.example.com,test108.example.com,reideenek.example.com,y.kryuchko.example.com,expert.example.com,maxxa011.example.com,flamesochi2.example.com,illarion4.example.com,relitakazan716.example.com,admin46.example.com,info59.example.com,support179.example.com,lenchik4.loginova.example.com,baxa.elterman.example.com,egorchkuzn.example.com,singapour.server.example.com,rlugov.example.com,alexey2.kuzmenkov.example.com",
+  "origin_ips": "",
+  "recommended_delay": "3-5 seconds",
+  "recommended_attacks": " XSS, SQLi, LFI (generic)",
+  "sample_payloads": "Generic: ' OR '1'='1, <script>alert(1)</script>, ../../etc/passwd, {{7*7}}"
+}

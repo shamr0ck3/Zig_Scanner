@@ -6,4 +6,7 @@ def get_geo(ip):
     except:
         print('{"error": "Failed to fetch geo data"}')
 if __name__ == "__main__":
-    get_geo(sys.argv[1] if len(sys.argv) > 1 else "")
+    if len(sys.argv) > 1 and sys.argv[1]:
+        get_geo(sys.argv[1])
+    else:
+        print("{\"error\": \"No target IP provided\"}")
