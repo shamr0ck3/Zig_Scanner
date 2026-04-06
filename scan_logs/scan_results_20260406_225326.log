@@ -1,0 +1,33 @@
+
+[✓] Safe NSE Scan Results for scanme.nmap.org:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-06 22:54 +0800
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.25s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT     STATE  SERVICE    VERSION
+80/tcp   open   http       Apache httpd 2.4.7 ((Ubuntu))
+|_http-title: Go ahead and ScanMe!
+| http-enum: 
+|_  /images/: Potentially interesting directory w/ listing on 'apache/2.4.7 (ubuntu)'
+443/tcp  closed https
+8080/tcp closed http-proxy
+8443/tcp closed https-alt
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 31.72 seconds
+
+[!] Aggressive NSE Scan Results for scanme.nmap.org (Vuln Scripts):
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-06 22:54 +0800
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.24s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT     STATE  SERVICE    VERSION
+80/tcp   open   http       Apache httpd 2.4.7 ((Ubuntu))
+443/tcp  closed https
+8080/tcp closed http-proxy
+8443/tcp closed https-alt
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 8.09 seconds
