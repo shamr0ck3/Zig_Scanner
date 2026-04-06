@@ -1,5 +1,0 @@
-[1;36m[*] Scan started: 20260328_194725[0m
-    Log: scan_logs/scan_results_20260328_194725.log
-[1;36m[+] Checking for required tools...[0m
-[1;31m[!] Error: Missing tools: [0m[1;33mhttpx[0m
-    Install with: pkg install httpx

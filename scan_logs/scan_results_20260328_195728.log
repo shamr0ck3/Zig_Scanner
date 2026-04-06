@@ -1,6 +1,0 @@
-[1;36m[*] Scan started: 20260328_195728[0m
-    Log: scan_logs/scan_results_20260328_195728.log
-[1;36m[+] Checking for required tools...[0m
-[1;32m[✓] All tools found[0m
-[1;31m[!] Error: Honeypot detector script 'honeydetect.py' not found.[0m
-    Please ensure 'honeydetect.py' is in the same directory as this script.

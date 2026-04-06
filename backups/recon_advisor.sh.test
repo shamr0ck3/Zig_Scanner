@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 # recon_advisor.sh - Enhanced Pre‑Scan Intelligence (v2.4)
 # Optional: whatweb, subfinder, dnsrecon, gospider, httpx, jq, dig
 
@@ -40,13 +40,13 @@ check_target() {
 
     # Try HTTP first
     local status
-    status=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "$http_target" 2>/dev/null)
+    status=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "$http_target" 2>/dev/null)
     if [[ $status -ge 200 && $status -lt 400 ]]; then
         echo "$http_target"
         return 0
     fi
     # Fallback to HTTPS
-    status=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "$https_target" 2>/dev/null)
+    status=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "$https_target" 2>/dev/null)
     if [[ $status -ge 200 && $status -lt 400 ]]; then
         echo "$https_target"
         return 0
@@ -76,8 +76,8 @@ check_test_sites() {
     echo -e "\n${YLW}[*] Checking known test sites availability & WAF headers:${RST}"
     for site in "${sites[@]}"; do
         local ua=$(random_ua)
-        local code=$(curl -s -o /dev/null -w "%{http_code}" -A "$ua" --connect-timeout 5 "http://$site/" 2>/dev/null)
-        local headers=$(curl -sfI -A "$ua" --connect-timeout 5 "http://$site/" 2>/dev/null)
+        local code=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" -A "$ua" --connect-timeout 5 "http://$site/" 2>/dev/null)
+        local headers=$(curl -s -fI -b "$COOKIE_STRING" -A "$ua" --connect-timeout 5 "http://$site/" 2>/dev/null)
         local waf=$(echo "$headers" | grep -iE "server|waf|cloudflare|cf-ray|akamai" | tr '\n' ' ')
         echo "  $code → $site" | tee -a "$ADVICE_TXT"
         if [ -n "$waf" ]; then
@@ -100,24 +100,24 @@ curl_recon() {
     # Phase 1 — Fingerprinting
     echo -e "\n${YLW}[*] Phase 1: Fingerprinting${RST}"
     local baseline
-    baseline=$(curl -s -A "$ua" --fail --max-redirs 3 --connect-timeout 10 "$target" | wc -c)
+    baseline=$(curl -s -b "$COOKIE_STRING" -A "$ua" --fail --max-redirs 3 --connect-timeout 10 "$target" | wc -c)
     echo -e "    [*] Baseline size: ${baseline}B"
 
     local server
-    server=$(curl -sI -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -i "^Server:" | cut -d' ' -f2-)
+    server=$(curl -s -I -b "$COOKIE_STRING" -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -i "^Server:" | cut -d' ' -f2-)
     local powered
-    powered=$(curl -sI -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -i "X-Powered-By:" | cut -d' ' -f2-)
+    powered=$(curl -s -I -b "$COOKIE_STRING" -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -i "X-Powered-By:" | cut -d' ' -f2-)
     [[ -n "$server" ]]  && echo -e "    [*] Server: $server"
     [[ -n "$powered" ]] && echo -e "    [*] Powered-By: $powered"
 
     local stack
-    stack=$(curl -s -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -ioE "jsp|php|asp\.net|django|laravel|node\.js|tomcat|java" | sort -u | tr '\n' ',' | sed 's/,$//')
+    stack=$(curl -s -b "$COOKIE_STRING" -A "$ua" --fail --max-redirs 3 "$target" 2>/dev/null | grep -ioE "jsp|php|asp\.net|django|laravel|node\.js|tomcat|java" | sort -u | tr '\n' ',' | sed 's/,$//')
     [[ -n "$stack" ]] && echo -e "    [*] Tech hints: $stack" || echo -e "    [*] Tech hints: none detected"
 
     # Phase 2 — Endpoint Discovery
     echo -e "\n${YLW}[*] Phase 2: Endpoint Discovery${RST}"
     local html
-    html=$(curl -sL -A "$ua" -H "X-Forwarded-For: $ip" --fail --max-redirs 3 "$target" 2>/dev/null)
+    html=$(curl -s -L -b "$COOKIE_STRING" -A "$ua" -H "X-Forwarded-For: $ip" --fail --max-redirs 3 "$target" 2>/dev/null)
 
     local endpoints
     endpoints=$(echo "$html" | grep -oE 'href="[^"]*"' | tr -d '"' | sed 's/href=//' | grep -v "^#\|^http\|^mailto\|^javascript" | sort -u)
@@ -139,7 +139,7 @@ curl_recon() {
 
     for param in "${test_params[@]}"; do
         local reflect
-        reflect=$(curl -s -A "$ua" -H "X-Forwarded-For: $ip" \
+        reflect=$(curl -s -b "$COOKIE_STRING" -A "$ua" -H "X-Forwarded-For: $ip" \
             --max-redirs 3 --connect-timeout 5 "${target}?${param}=${marker}" 2>/dev/null | grep -c "$marker")
         if [[ "$reflect" -gt 0 ]]; then
             echo -e "    ${RED}[!!!] REFLECTS: $param — potential XSS/SQLi injection point${RST}"
@@ -152,7 +152,7 @@ curl_recon() {
     xss_params=$(echo "$params" | tr ',' '\n')
     for param in $xss_params; do
         local xss_result
-        xss_result=$(curl -s -A "$ua" -H "X-Forwarded-For: $ip" \
+        xss_result=$(curl -s -b "$COOKIE_STRING" -A "$ua" -H "X-Forwarded-For: $ip" \
             --max-redirs 3 --connect-timeout 5 \
             "${target}?${param}=%22%3E%3Cscript%3Ealert(1)%3C%2Fscript%3E" 2>/dev/null \
             | grep -i "<script>alert(1)</script>")
@@ -166,10 +166,10 @@ curl_recon() {
     local lfi_params=("content" "page" "file" "path" "include" "load" "view" "doc")
     for param in "${lfi_params[@]}"; do
         local normal_size
-        normal_size=$(curl -s -A "$ua" --max-redirs 3 --connect-timeout 5 \
+        normal_size=$(curl -s -b "$COOKIE_STRING" -A "$ua" --max-redirs 3 --connect-timeout 5 \
             "${target}?${param}=index" 2>/dev/null | wc -c)
         local lfi_size
-        lfi_size=$(curl -s -A "$ua" --max-redirs 3 --connect-timeout 5 \
+        lfi_size=$(curl -s -b "$COOKIE_STRING" -A "$ua" --max-redirs 3 --connect-timeout 5 \
             "${target}?${param}=../../../etc/passwd" 2>/dev/null | wc -c)
         local diff=$(( lfi_size - normal_size ))
         diff="${diff#-}"
@@ -184,7 +184,7 @@ curl_recon() {
     # AJP Ghostcat check (FIXED)
     local base_host=$(echo "$target" | sed -E 's|^(https?://)([^:/]+).*$|\1\2|')
     local ajp
-    ajp=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "${base_host}:8009/" 2>/dev/null)
+    ajp=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 3 "${base_host}:8009/" 2>/dev/null)
     if [[ "$ajp" != "000" ]]; then
         echo -e "    ${RED}[!] AJP port 8009 OPEN — check Ghostcat CVE-2020-1938${RST}"
     else
@@ -193,7 +193,7 @@ curl_recon() {
 
     # Swagger/API exposure
     local swagger
-    swagger=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 5 \
+    swagger=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 5 \
         "${target%/}/swagger/index.html" 2>/dev/null)
     if [[ "$swagger" == "200" ]]; then
         echo -e "    ${RED}[!] Swagger UI exposed: ${target}/swagger/index.html${RST}"
@@ -201,14 +201,14 @@ curl_recon() {
 
     # CGI RCE check (CVE-2019-0232)
     local cgi
-    cgi=$(curl -s -A "$ua" --max-redirs 3 --connect-timeout 5 "${target%/}/cgi.exe?&dir" 2>/dev/null | wc -c)
+    cgi=$(curl -s -b "$COOKIE_STRING" -A "$ua" --max-redirs 3 --connect-timeout 5 "${target%/}/cgi.exe?&dir" 2>/dev/null | wc -c)
     if [[ "$cgi" -gt 100 ]]; then
         echo -e "    ${RED}[!] cgi.exe responds (${cgi}B) — test CVE-2019-0232 RCE${RST}"
     fi
 
     # Login endpoint
     local login
-    login=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 5 \
+    login=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 5 \
         "${target%/}/login.jsp" 2>/dev/null)
     [[ "$login" == "200" ]] && echo -e "    ${YLW}[*] Login page found: ${target}/login.jsp — try SQLi bypass${RST}"
 
@@ -236,7 +236,7 @@ main() {
     else
         # Validate the target with a quick status check
         local status
-        status=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 10 "$target" 2>/dev/null)
+        status=$(curl -s -b "$COOKIE_STRING" -o /dev/null -w "%{http_code}" --max-redirs 3 --connect-timeout 10 "$target" 2>/dev/null)
         if [[ $status -lt 200 || $status -ge 400 ]]; then
             echo -e "${RED}[!] Target returned HTTP $status. Not proceeding.${RST}"
             exit 1
@@ -253,8 +253,8 @@ main() {
     # ------------------------------------------------------------------
     # 1. Basic HTTP analysis
     # ------------------------------------------------------------------
-    local headers=$(curl -sfI -H "X-Forwarded-For: $(random_ip)" -A "$(random_ua)" --fail --max-redirs 3 "$target" 2>/dev/null)
-    local html=$(curl -sL -H "X-Forwarded-For: $(random_ip)" -A "$(random_ua)" --fail --max-redirs 3 "$target" 2>/dev/null)
+    local headers=$(curl -s -fI -b "$COOKIE_STRING" -H "X-Forwarded-For: $(random_ip)" -A "$(random_ua)" --fail --max-redirs 3 "$target" 2>/dev/null)
+    local html=$(curl -s -L -b "$COOKIE_STRING" -H "X-Forwarded-For: $(random_ip)" -A "$(random_ua)" --fail --max-redirs 3 "$target" 2>/dev/null)
     curl_recon "$target"
 
     # WAF detection
@@ -291,7 +291,7 @@ main() {
     # Extract parameters from HTML
     local params=$(echo "$html" | grep -oE '(name|id)="[^"]*"' | sed -E 's/.*="([^"]+)"/\1/' | sort -u)
     params+=$'\n'"$(echo "$html" | grep -oE 'href="[^"]*\?[^"]*"' | grep -oE '\?[^"#]*' | tr '&' '\n' | grep -oE '^[?]?[a-zA-Z_][a-zA-Z0-9_]*' | tr -d '?' | sort -u)"
-    local param_list=$(echo "$params" | sort -u | grep -v '^$' | tr '\n' ',' | sed 's/,$//')
+    local param_list=$(echo "$params" | sort -u | grep -v '^$' | head -n 20 | tr '\n' ',' | sed 's/,$//')
 
     # ------------------------------------------------------------------
     # 2. Port scanning

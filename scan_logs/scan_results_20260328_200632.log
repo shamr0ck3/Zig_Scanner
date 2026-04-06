@@ -1,9 +1,0 @@
-[1;36m[*] Scan started: 20260328_200632[0m
-    Log: scan_logs/scan_results_20260328_200632.log
-[1;36m[+] Checking for required tools...[0m
-[1;32m[✓] All tools found[0m
-
-[1;36m[+] Updating threat intelligence...[0m
-[1;32m[✓] Threat database updated[0m
-=======================================================
-Enter Target (domain/IP/URL): 
